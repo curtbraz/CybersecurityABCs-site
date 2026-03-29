@@ -70,9 +70,17 @@
 	<div id="body">	
 
 
-		<iframe src="uspaypalsrcall.html" width="100%" height="800" name="myiframe"></iframe>
+		<iframe id="orderframe" src="uspaypalsrcall.html" width="100%" height="800" name="myiframe"></iframe>
 		
 	</div></div>
+		<script>
+		(function() {
+		  var params = new URLSearchParams(window.location.search);
+		  var book = params.get('book');
+		  if (!book) return;
+		  document.getElementById('orderframe').src = 'uspaypalsrcall.html?book=' + encodeURIComponent(book);
+		})();
+		</script>
 
 		<div id="footerHolder">
 			<div id="footer">

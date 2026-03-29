@@ -175,6 +175,29 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
   captionText.innerHTML = dots[slideIndex-1].alt;
 }
+
+function applyBookFromQuery() {
+  var params = new URLSearchParams(window.location.search);
+  var book = params.get('book');
+  if (!book) return;
+  var map = {
+    'malware': 'M is for Malware',
+    'blueteam': 'B is for Blue Team',
+    'redteam': 'R is for Red Team',
+    'spearphishing': 'S is for Spear Phishing'
+  };
+  var resolved = map[book.toLowerCase()];
+  if (!resolved) return;
+  var select = document.getElementById('changecover');
+  if (!select) return;
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].value === resolved) {
+      select.selectedIndex = i;
+      GetSelectedTextValue2(select);
+      break;
+    }
+  }
+}
 </script>
 </HEAD>
 <BODY>
@@ -407,5 +430,8 @@ function showSlides(n) {
 <!--<b>If you selected a pre-order item (M or S), your order will ship together when they are all ready.</b>-->
 
 </CENTER>
+<script>
+applyBookFromQuery();
+</script>
 </BODY>
 </HTML>
